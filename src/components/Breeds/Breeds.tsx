@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom';
 // block
 const Breeds = () => {
     const { page = 1 } = useParams()
-
     
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const [animals, setAnimals] = useState<IBreeds[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null as null | string)
@@ -25,33 +27,26 @@ const Breeds = () => {
 
         setAnimals(store.getState().fetchBreedsReducer.breeds)
 
-    }, [page])
+    }, [page])    
     
     useEffect(() => {
         Number(page) === 1 ? setPrevButton(false) : setPrevButton(true)
-        Number(page) >= 16 ? setNextButton(false) : setNextButton(true)
+        Number(page) >= 17 ? setNextButton(false) : setNextButton(true)
     }, [page])
 
     store.subscribe(() => {
-        setAnimals(store.getState().fetchBreedsReducer.breeds)
+        setAnimals(store.getState().fetchBreedsReducer.breeds)        
 
         setLoading(store.getState().fetchBreedsReducer.loading)
 
         setError(store.getState().fetchBreedsReducer.error)
     })
 
-    const navigate = useNavigate();
-    const location = useLocation();
-
     const removeAllSearchParams = () => {
         navigate({ pathname: location.pathname, search: '' });
       };
 
-      console.log(animals);
-      
-      
-
-    if (animals.length === 0) {
+    if (animals.length === 0 && !loading && !error) {
         return <h1 className="text-5xl text-center">No data</h1>
     }
 
@@ -61,12 +56,11 @@ const Breeds = () => {
 
     if (error) {
         return <h1 className="text-5xl text-center">{error}</h1>
-    }
-   
+    }    
 
     return (
-        <div className="flex flex-col justify-center items-center gap-y-5">
-            <h1 className="text-5xl">Dogs List</h1>
+        <div className="flex flex-col justify-center items-center gap-y-5 text-white">
+            <h1 className="text-5xl mt-7">Dogs List</h1>
             <ul className="flex flex-wrap justify-center gap-4">
                 {animals.map((item) => (
                     <li className="relative p-3 flex flex-col w-64 h-64 justify-end rounded-2xl bg-slate-700 z-0"  key={item.id}>

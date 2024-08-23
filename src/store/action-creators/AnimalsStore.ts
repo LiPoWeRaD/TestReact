@@ -18,10 +18,11 @@ const API = axios.create({
 }); 
 
 
+
 export const fetchBreed = (id: string) => {
     return async (dispatch: Dispatch<BreedAction>) => {
         dispatch({ type: FETCH_BREED.FETCH_BREED_REQUEST });
-        await API.get(`https://api.thedogapi.com/v1/breeds/?breed_ids=${id}&limit=10`).then(res => {
+        await API.get(`https://api.thedogapi.com/v1/breeds/${id}`).then(res => {
             dispatch({ type: FETCH_BREED.FETCH_BREED_SUCCESS, payload: res.data });
         }).catch(err => {
             dispatch({ type: FETCH_BREED.FETCH_BREED_FAILURE, payload: err.message });

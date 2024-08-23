@@ -7,12 +7,6 @@ import Breeds from "../../components/Breeds"
 
 
 const Main = () => {
-    
-
-       
-
-
-
     return (
         <section className="container mx-auto">
             <Breeds />

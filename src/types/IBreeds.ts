@@ -1,19 +1,32 @@
 interface IBreeds {
+    bred_for: string
+    breed_group: string
+    height: {
+        imperial: string
+        metric: string
+    }
     id: string
+    images: {
+        id: string
+        width: number
+        height: number
+        url: string
+    }
+    life_span: string
+    name: string
+    origin: string
+    reference_image_id: string
+    temperament: string
     weight: {
         imperial: string
         metric: string
     }
-    name: string
     cfa_url: string
     vetstreet_url: string
     vcahospitals_url: string
-    temperament: string
-    origin: string
     country_codes: string
     country_code: string
     description: string
-    life_span: string
     indoor: number
     laps: number
     alt_names: string
@@ -38,7 +51,6 @@ interface IBreeds {
     short_legs: number
     wikipedia_url: string
     hypoallergenic: number
-    reference_image_id: string
 }
 
 export default IBreeds

@@ -1,5 +1,5 @@
+import IInfo from "./IBreed"
 import IBreeds from "./IBreeds"
-import IFact from "./IFact"
 
 
 export enum FETCH_BREED {
@@ -9,7 +9,7 @@ export enum FETCH_BREED {
 }
 
 export type BreedState = {
-    breed: IFact,
+    breed: IBreeds,
     page: number,
     loading: boolean,
     error: null | string
@@ -19,7 +19,7 @@ export type BreedAction = {
         type: FETCH_BREED.FETCH_BREED_REQUEST
     } | {
         type: FETCH_BREED.FETCH_BREED_SUCCESS
-        payload: IFact
+        payload: IBreeds
     } | {
         type: FETCH_BREED.FETCH_BREED_FAILURE
         payload: string
